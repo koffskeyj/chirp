@@ -8,6 +8,11 @@
   </head>
   <body>
     <div class="container">
+      <br>
+      {{request.user}}
+      <br>
+      <a href="{% url 'login' %}">Login</a>
+      <a href="{% url 'logout' %}?next=/">Logout</a>
     {% block content %}
       No content provided
     {% endblock %}

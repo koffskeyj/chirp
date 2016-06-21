@@ -2,4 +2,15 @@
 
 {% block content %}
   <h1>Welcome to Bird Sounder</h1>
+  <h4>{{amount}} bird sounds</h4>
+{% for birdsound in object_list %}
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{birdsound.bird}}</h3>
+  </div>
+  <div class="panel-body">
+    {{birdsound.body}}
+  </div>
+</div>
+{% endfor %}
 {% endblock %}}
