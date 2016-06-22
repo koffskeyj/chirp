@@ -16,11 +16,13 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
-from main.views import IndexView
+from main.views import IndexView, BirdSoundDetailView, CreateBirdSoundView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', IndexView.as_view(), name="index_view"),
-    url(r'^', include('django.contrib.auth.urls')) 
+    url(r'^', include('django.contrib.auth.urls')),
+    url(r'^bird_sound/(?P<pk>\d+)/$', BirdSoundDetailView.as_view(), name="bird_sound_detail_view"),
+    url(r'^create_bird_sound/$', CreateBirdSoundView.as_view(), name="create_bird_sound_view")
 
 ]

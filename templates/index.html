@@ -10,6 +10,10 @@
   </div>
   <div class="panel-body">
     {{birdsound.body}}
+    {% if birdsound.bird == request.user  %}
+      <br>
+      <a href="{% url 'bird_sound_detail_view' birdsound.pk %}">Click here for details</a>
+    {% endif %}
   </div>
 </div>
 {% endfor %}
