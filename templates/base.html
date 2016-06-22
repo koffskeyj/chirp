@@ -12,7 +12,6 @@
       {{request.user}}
       <br>
       <a href="{% url 'index_view' %}">All Bird Sounds</a>
-      <a href="{% url 'create_bird_sound_view' %}">Create Bird Sound</a>
       <a href="{% url 'login' %}">Login</a>
       <a href="{% url 'logout' %}?next=/">Logout</a>
     {% block content %}

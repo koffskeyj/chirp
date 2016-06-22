@@ -3,18 +3,45 @@
 {% block content %}
   <h1>Welcome to Bird Sounder</h1>
   <h4>{{amount}} bird sounds</h4>
-{% for birdsound in object_list %}
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">{{birdsound.bird}}</h3>
-  </div>
-  <div class="panel-body">
-    {{birdsound.body}}
-    {% if birdsound.bird == request.user  %}
-      <br>
-      <a href="{% url 'bird_sound_detail_view' birdsound.pk %}">Click here for details</a>
+  <div class="row">
+    <div class="col-md-6">
+      {% for birdsound in object_list %}
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">{{birdsound.bird}}</h3>
+        </div>
+        <div class="panel-body">
+          {{birdsound.body}}
+          {% if birdsound.bird == request.user  %}
+            <br>
+            <a href="{% url 'bird_sound_detail_view' birdsound.pk %}">Click here for details</a>
+            <br>
+            <a class ="btn btn-danger" href="{% url 'bird_sound_delete_view' birdsound.pk %}">Delete Bird Sound</a>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% if request.user.is_authenticated %}
+    <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Bird Sound it</h3>
+      </div>
+      <div class="panel-body">
+        <form class="" action="" method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" name="bird sound" value="Bird Sound!">
     {% endif %}
+        </form>
+        {% if birdsound.bird == request.user  %}
+          <br>
+          <a href="{% url 'bird_sound_detail_view' birdsound.pk %}">Click here for details</a>
+          <br>
+          <a class ="btn btn-danger" href="{% url 'bird_sound_delete_view' birdsound.pk %}">Delete Bird Sound</a>
+        {% endif %}
+      </div>
+    </div>
   </div>
-</div>
-{% endfor %}
 {% endblock %}}

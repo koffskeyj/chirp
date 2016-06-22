@@ -1,5 +1,5 @@
 from django.contrib import admin
-from main.models import BirdSound, StopWord
+from main.models import BirdSound, StopWord, Profile
 
 class BirdSoundAdmin(admin.ModelAdmin):
     list_display = ["body", "bird"]
@@ -12,3 +12,5 @@ class StopWordAdmin(admin.ModelAdmin):
     search_fields = ["word"]
 
 admin.site.register(StopWord, StopWordAdmin)
+
+admin.site.register(Profile)
