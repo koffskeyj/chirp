@@ -1,8 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-<form class="" action="" method="post">
-  <h1>Profile</h1>
+
+<h1>Profile</h1>
+
+<img src="{{ object.photo_url }}" alt="" />
+
+<form  class="" action="" method="post" enctype= "multipart/form-data">
   {% csrf_token %}
   {{ form.as_p }}
   <input type="submit" name="name" value="Save">

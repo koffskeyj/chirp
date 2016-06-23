@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
+from django.contrib.auth.forms import AuthenticationForm
 from main.models import StopWord, BirdSound, Profile
 
 class IndexView(CreateView):
@@ -25,6 +26,9 @@ class IndexView(CreateView):
         context = super().get_context_data(**kwargs)
         context["object_list"] = BirdSound.objects.all()
         context["amount"] = BirdSound.objects.all().count()
+        if self.request.user.is_authenticated:
+            context["profile_form"] = ProfileUpdateForm(initial={favorite_bird: self.request.user.profile.favorite_bird,
+            photo: self.request.user.profile.photo})
         return context
 
 
@@ -36,7 +40,7 @@ class BirdSoundDetailView(DetailView):
 
 
 class ProfileUpdateView(UpdateView):
-    fields = ["favorite_bird"]
+    fields = ["favorite_bird", "photo"]
     success_url = reverse_lazy("profile_update_view")
 
     def get_object(self, queryset=None):

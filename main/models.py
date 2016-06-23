@@ -18,6 +18,13 @@ class StopWord(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField("auth.User")
     favorite_bird = models.CharField(max_length=100, null=True)
+    photo = models.ImageField(upload_to="profile_photos", null=True, blank=True, verbose_name="Profile Photo")
+
+    @property
+    def photo_url(self):
+        if self.photo:
+            return self.photo.url
+        return "http://theawesomer.com/facebook-profile-silhouettes/43345/"
 
 
 @receiver(post_save, sender=StopWord)

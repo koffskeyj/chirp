@@ -8,7 +8,8 @@
       {% for birdsound in object_list %}
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">{{birdsound.bird}}</h3>
+          <h3 class="panel-title"><img class="thumb" src="{{ birdsound.bird.profile.photo_url}}" alt="" />
+            {{birdsound.bird}}</h3>
         </div>
         <div class="panel-body">
           {{birdsound.body}}
@@ -16,6 +17,10 @@
             <br>
             <a href="{% url 'bird_sound_detail_view' birdsound.pk %}">Click here for details</a>
             <br>
+            <form class="" action="{% url 'bird_sound_delete_view' birdsound.pk %}" method="post">
+              {% csrf_token %}
+              <input type="submit" name="name" value="Delete Bird Sound">
+            </form>
             <a class ="btn btn-danger" href="{% url 'bird_sound_delete_view' birdsound.pk %}">Delete Bird Sound</a>
           {% endif %}
         </div>
